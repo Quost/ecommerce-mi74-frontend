@@ -1,24 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Login from './pages/Login';
+import PortalVendedor from './pages/PortalVendedor';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login/>
+    element: <Login />
+  },
+  {
+    path: '/portal-vendedor',
+    element: <PortalVendedor />
   }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
