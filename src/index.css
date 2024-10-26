@@ -6,4 +6,8 @@
   .inputs-styles {
     @apply outline-none border-[2px] transition-all border-border-rgba-black focus:border-[#210b2C] rounded-lg p-4 text-xl w-[380px] shadow-box-shadow-personalized;
   }
+
+  .button-style {
+    @apply bg-[#210b2C] transition-all text-white font-semibold text-xl py-3 rounded-lg opacity-80 hover:opacity-100 w-[100px];
+  }
 }

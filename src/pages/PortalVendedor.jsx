@@ -15,6 +15,14 @@ export default function PortalVendedor() {
     setModal(true);
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProdutoSelecionado((prevProduto) => ({
+      ...prevProduto,
+      [name]: value,
+    }));
+  };
+
   useEffect(() => {
     const esc = (e) => {
       if (e.key === "Escape") {
@@ -68,21 +76,52 @@ export default function PortalVendedor() {
                   src={produtoSelecionado.imagem}
                   alt={produtoSelecionado.nome}
                   className="w-[200px] h-auto rounded-lg"
+                  onChange={handleChange}
                 />
                 <div className="flex flex-col justify-center items-start gap-2">
                   <div className="flex flex-col">
                     <label htmlFor="nameProduct">Nome: </label>
-                    <input type="text" name={produtoSelecionado.nome} id="nameProduct" value={produtoSelecionado.nome} className="inputs-styles" />
+                    <input
+                      type="text"
+                      name={produtoSelecionado.nome}
+                      id="nameProduct"
+                      placeholder={produtoSelecionado.nome || ""}
+                      className="inputs-styles"
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="priceProduct">Preço: </label>
-                    <input type="text" name={produtoSelecionado.valor} id="priceProduct" value={produtoSelecionado.valor} className="inputs-styles" />
+                    <input
+                      type="text"
+                      name={produtoSelecionado.valor}
+                      id="priceProduct"
+                      placeholder={produtoSelecionado.valor || ""}
+                      className="inputs-styles"
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="flex flex-col">
                     <label htmlFor="descriptionProduct">quantidade: </label>
-                    <input type="text" name={produtoSelecionado.quantidade} id="descriptionProduct" value={produtoSelecionado.quantidade} className="inputs-styles" />
+                    <input
+                      type="text"
+                      name={produtoSelecionado.quantidade}
+                      id="descriptionProduct"
+                      placeholder={produtoSelecionado.quantidade || ""}
+                      className="inputs-styles"
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
+              </div>
+              <div className="flex justify-center gap-10 mt-14">
+                <button
+                  onClick={() => setModal(false)}
+                  className="button-style bg-red-800"
+                >
+                  Cancelar
+                </button>
+                <button className="button-style">Salvar</button>
               </div>
             </section>
           </div>
