@@ -40,7 +40,7 @@ export default function PortalVendedor() {
   return (
     <>
       {/* <title>Portal do Vendedor</title> */}
-      <div className="bg-bg-whitePersonalized h-screen">
+      <div className="h-screen bg-bg-whitePersonalized">
         <Header />
         <div className="flex flex-col gap-5 justify-center items-center mt-[4rem]">
           <ProductList
@@ -62,7 +62,7 @@ export default function PortalVendedor() {
         <div id="modalComponent" className={(!modal && "hidden ") + ` `}>
           <div className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 absolute top-0 left-0">
             <section className="bg-bg-whitePersonalized w-[60%] h-[80%] rounded-md">
-              <div className="flex justify-between items-center p-10">
+              <div className="flex items-center justify-between p-10">
                 <h1 className="text-3xl font-bold">Editar produto</h1>
                 <button
                   onClick={() => setModal(false)}
@@ -71,14 +71,14 @@ export default function PortalVendedor() {
                   <FontAwesomeIcon icon={faClose} />
                 </button>
               </div>
-              <div className="flex justify-around items-center gap-2">
+              <div className="flex items-center justify-around gap-2">
                 <img
                   src={produtoSelecionado.imagem}
                   alt={produtoSelecionado.nome}
                   className="w-[200px] h-auto rounded-lg"
                   onChange={handleChange}
                 />
-                <div className="flex flex-col justify-center items-start gap-2">
+                <div className="flex flex-col items-start justify-center gap-2">
                   <div className="flex flex-col">
                     <label htmlFor="nameProduct">Nome: </label>
                     <input
@@ -88,6 +88,7 @@ export default function PortalVendedor() {
                       placeholder={produtoSelecionado.nome || ""}
                       className="inputs-styles"
                       onChange={handleChange}
+                      autoComplete="off"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -99,6 +100,7 @@ export default function PortalVendedor() {
                       placeholder={produtoSelecionado.valor || ""}
                       className="inputs-styles"
                       onChange={handleChange}
+                      autoComplete="off"
                     />
                   </div>
                   <div className="flex flex-col">
@@ -110,6 +112,7 @@ export default function PortalVendedor() {
                       placeholder={produtoSelecionado.quantidade || ""}
                       className="inputs-styles"
                       onChange={handleChange}
+                      // autoComplete="off"
                     />
                   </div>
                 </div>
@@ -117,7 +120,7 @@ export default function PortalVendedor() {
               <div className="flex justify-center gap-10 mt-14">
                 <button
                   onClick={() => setModal(false)}
-                  className="button-style bg-red-800"
+                  className="bg-red-800 button-style"
                 >
                   Cancelar
                 </button>
