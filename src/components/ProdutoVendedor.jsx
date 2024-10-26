@@ -1,8 +1,6 @@
-import camisetapreta from "../assets/camiseta-preta.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 export default function ProductList({
   imagem,
   valor,
@@ -12,7 +10,7 @@ export default function ProductList({
 }) {
   return (
     <>
-      <div className="bg-[#7389AE] w-[90%] mx-auto h-[150px] rounded-lg shadow-md flex items-center justify-between p-2 ransition-all text-white text-xl">
+      <div className="bg-[#7389AE] w-[90%] mx-auto h-[150px] rounded-lg shadow-md flex items-center justify-between p-2 transition-all text-white text-xl">
         <img
           src={imagem}
           alt="Produto da loja"

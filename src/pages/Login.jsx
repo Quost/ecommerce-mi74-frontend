@@ -12,13 +12,13 @@ export default function Login() {
                 <div className="flex flex-row">
                     <div
                         onClick={() => setLogin(true)}  
-                        className={(login ? "bg-[#afc4d0]" : "bg-white " ) +` w-1/2 flex justify-center py-4 rounded-lg`}
+                        className={(login ? "bg-[#afc4d0]" : "bg-white " ) +` w-1/2 flex justify-center py-4 rounded-lg cursor-pointer`}
                     >
                         <span>Log in</span>
                     </div>
                     <div
                         onClick={() => setLogin(false)} 
-                        className={(!login ? "bg-[#afc4d0]" : "bg-white " ) + ` w-1/2 flex justify-center py-4 rounded-lg`}>
+                        className={(!login ? "bg-[#afc4d0]" : "bg-white " ) + ` w-1/2 flex justify-center py-4 rounded-lg cursor-pointer`}>
                         <span>Sign in</span>
                     </div>
                 </div>
