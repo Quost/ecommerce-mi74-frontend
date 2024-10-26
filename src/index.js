@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Login from './pages/Login';
 import PortalVendedor from './pages/PortalVendedor';
+import HomePage from './pages/HomePage';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: '/portal-vendedor',
     element: <PortalVendedor />
+  },
+  {
+    path: '/home',
+    element: <HomePage />
   }
 ])
 
