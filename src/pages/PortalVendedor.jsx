@@ -112,7 +112,7 @@ export default function PortalVendedor() {
                       placeholder={produtoSelecionado.quantidade || ""}
                       className="inputs-styles"
                       onChange={handleChange}
-                      // autoComplete="off"
+                      autoComplete="off"
                     />
                   </div>
                 </div>
