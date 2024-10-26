@@ -1,8 +1,10 @@
+import ProductList from "../components/ProductList";
+
 export default function PortalVendedor() {
     return (
         <>
-            <div className="bg-fuchsia-400">
-                
+            <div className="bg-bg-whitePersonalized h-screen">
+                <ProductList></ProductList>
             </div>
         </>
     );
