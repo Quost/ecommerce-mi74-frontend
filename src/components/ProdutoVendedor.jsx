@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-export default function ProductList({
+export default function Product({
   imagem,
   valor,
   quantidade,
@@ -23,7 +23,7 @@ export default function ProductList({
           <FontAwesomeIcon
             icon={faPen}
             className="text-white hover:scale-110 text-[2rem] cursor-pointer"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen(nome, valor, quantidade, imagem)}
           />
           <FontAwesomeIcon
             icon={faTrash}
