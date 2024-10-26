@@ -4,6 +4,6 @@
 
 @layer components {
   .inputs-styles {
-    @apply outline-none border-[2px] transition-all border-transparent focus:border-[#210b2C] rounded-lg p-4 text-xl w-[380px];
+    @apply outline-none border-[2px] transition-all border-border-rgba-black focus:border-[#210b2C] rounded-lg p-4 text-xl w-[380px] shadow-box-shadow-personalized;
   }
 }
