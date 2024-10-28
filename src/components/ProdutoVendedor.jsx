@@ -29,7 +29,7 @@ export default function Product({
             icon={faTrash}
             className="text-[#FF0048] hover:scale-110 text-[2rem] cursor-pointer"
           />
-        </div>        
+        </div>
       </div>
     </>
   );
