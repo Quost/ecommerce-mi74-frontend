@@ -9,7 +9,6 @@ import {
 import Login from './pages/Login';
 import PortalVendedor from './pages/PortalVendedor';
 import HomePage from './pages/HomePage';
-import TesteAxios from './components/teste-axios';
 
 const router = createBrowserRouter([
   {
@@ -23,10 +22,6 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <HomePage />
-  },
-  {
-    path: '/teste-axios',
-    element: <TesteAxios/>
   },
 ])
 

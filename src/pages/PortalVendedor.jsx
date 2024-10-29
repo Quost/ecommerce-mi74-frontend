@@ -28,8 +28,8 @@ export default function PortalVendedor() {
     fetchProdutos();
   }, []);
 
-  const abrirModalComProduto = (nome, valor, quantidade, imagem) => {
-    setProdutoSelecionado({ nome, valor, quantidade, imagem });
+  const abrirModalComProduto = (nome, custo, quantidade, imagem) => {
+    setProdutoSelecionado({ nome, custo, quantidade, imagem });
     setModal(true);
   };
 
@@ -64,10 +64,10 @@ export default function PortalVendedor() {
           {produtos.map((produto) => (
             <Product
             imagem={camisetapreta}
-            valor={produto.custo}
-            quantidade={produto.quantidade}
+            custo={produto.custo}
+            quantidade={produto.estoque ? produto.estoque.quantidade : 0}
             nome={produto.nome}
-            setOpen={() => abrirModalComProduto(produto.nome, produto.valor, produto.quantidade, camisetapreta)}
+            setOpen={() => abrirModalComProduto(produto.nome, produto.custo, produto.quantidade, camisetapreta)}
             />
           ))}
         </div>
@@ -107,9 +107,9 @@ export default function PortalVendedor() {
                     <label htmlFor="priceProduct">Preço: </label>
                     <input
                       type="text"
-                      name={produtoSelecionado.valor}
+                      name={produtoSelecionado.custo}
                       id="priceProduct"
-                      placeholder={produtoSelecionado.valor || ""}
+                      placeholder={produtoSelecionado.custo || ""}
                       className="inputs-styles"
                       onChange={handleChange}
                       autoComplete="off"
