@@ -78,7 +78,7 @@ export default function TesteAxios() {
           </button>
 
           <button className="button-style w-[220px]"
-          onClick={() => criarProduto("Roupa", "Camiseta Branca", 80, "Camiseta branca", 2)}>
+          onClick={() => criarProduto("Roupa", "Camiseta Branca", 80, "Camiseta branca", 1)}>
             Criar produto</button>
 
           <button className="button-style w-[220px]" onClick={() => listarProdutos()}>

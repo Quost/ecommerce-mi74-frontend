@@ -1,14 +1,32 @@
-import ProductList from "../components/ProdutoVendedor";
+import Product from "../components/ProdutoVendedor";
 import camisetapreta from "../assets/camiseta-preta.jpeg";
 import shorts from "../assets/shorts.jpeg";
 import Header from "../components/Header";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import React from "react";
+
+const baseURLProdutos = "http://localhost:8090/produtos";
 
 export default function PortalVendedor() {
   const [modal, setModal] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState({});
+  const [produtos, setProdutos] = useState([]);
+
+  const fetchProdutos = async () => {
+      try {
+        const response = await axios.get(`${baseURLProdutos}/listar`);
+        setProdutos(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+  }
+
+  useEffect(() => {
+    fetchProdutos();
+  }, []);
 
   const abrirModalComProduto = (nome, valor, quantidade, imagem) => {
     setProdutoSelecionado({ nome, valor, quantidade, imagem });
@@ -43,21 +61,15 @@ export default function PortalVendedor() {
       <div className="h-screen bg-bg-whitePersonalized">
         <Header />
         <div className="flex flex-col gap-5 justify-center items-center mt-[4rem]">
-          <ProductList
+          {produtos.map((produto) => (
+            <Product
             imagem={camisetapreta}
-            valor={70}
-            quantidade={26}
-            nome={"Camiseta preta"}
-            setOpen={abrirModalComProduto}
-          />
-
-          <ProductList
-            imagem={shorts}
-            valor={40}
-            quantidade={12}
-            nome={"Shorts preto"}
-            setOpen={abrirModalComProduto}
-          />
+            valor={produto.custo}
+            quantidade={produto.quantidade}
+            nome={produto.nome}
+            setOpen={() => abrirModalComProduto(produto.nome, produto.valor, produto.quantidade, camisetapreta)}
+            />
+          ))}
         </div>
         <div id="modalComponent" className={(!modal && "hidden ") + ` `}>
           <div className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 absolute top-0 left-0">
