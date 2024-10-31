@@ -43,7 +43,7 @@ export default function HeaderVendedor() {
         </div>
       </header>
       <div id="modalComponent" className={(!modal && "hidden ") + ``}>
-        <div className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 absolute top-0 left-0">
+        <div className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 fixed top-0 left-0">
           <section className="bg-bg-whitePersonalized w-[60%] pb-10 px-5 rounded-md">
             <div className="flex items-center justify-between p-2 sm:p-10">
               <h1 className="text-xl sm:text-3xl font-bold">
