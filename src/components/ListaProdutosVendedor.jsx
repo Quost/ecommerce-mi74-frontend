@@ -79,11 +79,11 @@ export default function ListaProdutosVendedor() {
           />
         ))}
       </div>
-      <div id="modalComponent" className={(!modal && "hidden ") + ` `}>
+      <div id="modalComponent" className={(!modal && "hidden ") + ``}>
         <div className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 absolute top-0 left-0">
-          <section className="bg-bg-whitePersonalized w-[60%] h-[80%] rounded-md">
-            <div className="flex items-center justify-between p-10">
-              <h1 className="text-3xl font-bold">Editar produto</h1>
+          <section className="bg-bg-whitePersonalized w-[60%] pb-10 px-5 rounded-md">
+            <div className="flex items-center justify-between p-2 sm:p-10">
+              <h1 className="text-xl sm:text-3xl font-bold">Editar produto</h1>
               <button
                 onClick={() => setModal(false)}
                 className="text-[#FF0048] hover:scale-110 text-[2rem] cursor-pointer"
@@ -91,7 +91,7 @@ export default function ListaProdutosVendedor() {
                 <FontAwesomeIcon icon={faClose} />
               </button>
             </div>
-            <div className="flex items-center justify-around gap-2">
+            <div className="flex flex-col lg:flex-row items-center justify-around gap-2">
               <img
                 src={produtoSelecionado.imagem}
                 alt={produtoSelecionado.nome}
@@ -99,7 +99,7 @@ export default function ListaProdutosVendedor() {
                 onChange={handleChange}
               />
               <div className="flex flex-col items-start justify-center gap-2">
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                   <label htmlFor="nameProduct">Nome: </label>
                   <input
                     type="text"
@@ -111,7 +111,7 @@ export default function ListaProdutosVendedor() {
                     autoComplete="off"
                   />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                   <label htmlFor="priceProduct">Preço: </label>
                   <input
                     type="text"
@@ -129,7 +129,7 @@ export default function ListaProdutosVendedor() {
                     type="text"
                     name={produtoSelecionado.quantidade}
                     id="descriptionProduct"
-                    placeholder={produtoSelecionado.quantidade || ""}
+                    placeholder={produtos.map((produtos) => (produtos.estoque.quantidade)) || ""}
                     className="inputs-styles"
                     onChange={handleChange}
                     autoComplete="off"
