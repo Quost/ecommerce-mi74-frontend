@@ -24,11 +24,11 @@ export default function ListaProdutosVendedor() {
 
   useEffect(() => {
     fetchProdutos();
-  
+
     const intervalId = setInterval(() => {
       fetchProdutos();
     }, 10000);
-  
+
     return () => clearInterval(intervalId);
   }, []);
 
@@ -129,7 +129,10 @@ export default function ListaProdutosVendedor() {
                     type="text"
                     name={produtoSelecionado.quantidade}
                     id="descriptionProduct"
-                    placeholder={produtos.map((produtos) => (produtos.estoque.quantidade)) || ""}
+                    placeholder={
+                      produtos.map((produtos) => produtos.estoque.quantidade) ||
+                      ""
+                    }
                     className="inputs-styles"
                     onChange={handleChange}
                     autoComplete="off"
