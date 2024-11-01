@@ -1,7 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-export default function Product({ imagem, custo, quantidade, nome, setOpen }) {
+import axios from "axios";
+
+const urlProdutos = "http://localhost:8090/produtos";
+
+export default function Product({id, imagem, custo, quantidade, nome, setOpen }) {
+
+  const deletarProduto = async () => {
+    try {
+      const response = await axios.delete(`${urlProdutos}/deletar/${id}`)
+      console.log("Produto deletado")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className="bg-[#7389AE] w-[90%] mx-auto h-[370px] md:h-[150px] rounded-lg shadow-md text-center md:flex items-center justify-between p-2 transition-all text-white text-xl">
@@ -22,6 +36,7 @@ export default function Product({ imagem, custo, quantidade, nome, setOpen }) {
           <FontAwesomeIcon
             icon={faTrash}
             className="text-[#FF0048] hover:scale-110 text-[2rem] cursor-pointer"
+            onClick={() => deletarProduto()}
           />
         </div>
       </div>

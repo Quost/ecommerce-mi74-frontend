@@ -64,6 +64,7 @@ export default function ListaProdutosVendedor() {
       <div className="flex flex-col gap-5 justify-center items-center mt-[4rem]">
         {produtos.map((produto) => (
           <Product
+            key={produto.id}
             imagem={camisetapreta}
             custo={produto.custo}
             quantidade={produto.estoque ? produto.estoque.quantidade : 0}
