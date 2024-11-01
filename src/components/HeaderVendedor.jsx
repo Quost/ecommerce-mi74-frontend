@@ -1,18 +1,54 @@
 import { faAdd, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState, useRef } from "react";
+
+const urlProdutos = "http://localhost:8090/produtos";
+const urlEstoque = "http://localhost:8090/estoque";
 
 export default function HeaderVendedor() {
   const [modal, setModal] = useState(false);
 
-  function salvar() {
-    const categoria = document.getElementById("categoriaProduct");
-    const nome = document.getElementById("categoriaProduct");
-    const valor = document.getElementById("categoriaProduct");
-    const descricao = document.getElementById("categoriaProduct");
-    const quantidade = document.getElementById("quantidadeProduct");
-    //Continuar a mexer aqui para usar o axios e conseguir adicionar um produto pelo front-end
-  }
+  // Usando useRef para cada input
+  const categoriaRef = useRef(null);
+  const nomeRef = useRef(null);
+  const valorRef = useRef(null);
+  const descricaoRef = useRef(null);
+  const quantidadeRef = useRef(null);
+
+  const adicionarProduto = async () => {
+    await criarProduto();
+  };
+
+  const criarEstoque = async () => {
+    try {
+      const estoqueResponse = await axios.post(`${urlEstoque}/adicionar`, {
+        quantidade: quantidadeRef.current.value,
+      });
+      const estoqueId = estoqueResponse.data.id;
+
+      return estoqueId;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const criarProduto = async () => {
+    try {
+      const estoqueID = await criarEstoque();
+      const produtoResponse = await axios.post(`${urlProdutos}/adicionar`, {
+        produto: {
+          categoria: categoriaRef.current.value,
+          nome: nomeRef.current.value,
+          custo: valorRef.current.value,
+          descricao: descricaoRef.current.value,
+        },
+        estoqueId: estoqueID,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const esc = (e) => {
@@ -66,6 +102,7 @@ export default function HeaderVendedor() {
                   id="categoriaProduct"
                   className="inputs-styles"
                   autoComplete="off"
+                  ref={categoriaRef}
                 />
               </div>
               <div className="flex flex-col ">
@@ -77,6 +114,7 @@ export default function HeaderVendedor() {
                   id="nameProduct"
                   className="inputs-styles"
                   autoComplete="off"
+                  ref={nomeRef}
                 />
               </div>
               <div className="flex flex-col ">
@@ -88,6 +126,7 @@ export default function HeaderVendedor() {
                   id="custoProduct"
                   className="inputs-styles"
                   autoComplete="off"
+                  ref={valorRef}
                 />
               </div>
               <div className="flex flex-col ">
@@ -102,6 +141,7 @@ export default function HeaderVendedor() {
                   id="descriptionProduct"
                   className="inputs-styles"
                   autoComplete="off"
+                  ref={descricaoRef}
                 />
               </div>
               <div className="flex flex-col ">
@@ -116,6 +156,7 @@ export default function HeaderVendedor() {
                   id="quantidadeProduct"
                   className="inputs-styles"
                   autoComplete="off"
+                  ref={quantidadeRef}
                 />
               </div>
             </div>
@@ -126,7 +167,7 @@ export default function HeaderVendedor() {
               >
                 Cancelar
               </button>
-              <button className="button-style" onClick={() => salvar()}>
+              <button className="button-style" onClick={adicionarProduto}>
                 Salvar
               </button>
             </div>
