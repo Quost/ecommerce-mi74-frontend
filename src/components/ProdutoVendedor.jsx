@@ -32,6 +32,11 @@ export default function Product({
     }, 2000);
   }
 
+  function confirmDelete() {
+    deletarProduto();
+    setModalDelete(true)
+  }
+
   return (
     <>
       <div className="bg-[#7389AE] w-[90%] mx-auto h-[370px] md:h-[150px] rounded-lg shadow-md text-center md:flex items-center justify-between p-2 transition-all text-white text-xl">
@@ -43,7 +48,7 @@ export default function Product({
         <p className="my-2 md:my-0">Nome: {nome}</p>
         <p className="my-2 md:my-0">R$: {custo}</p>
         <p className="my-2 md:my-0">Quantidade: {quantidade}</p>
-        <div className="flex my-5 md:my-0 gap-10 md:mr-5 justify-center items-center">
+        <div className="flex items-center justify-center gap-10 my-5 md:my-0 md:mr-5">
           <FontAwesomeIcon
             icon={faPen}
             className="text-white hover:scale-110 text-[2rem] cursor-pointer"
@@ -65,9 +70,9 @@ export default function Product({
             <h1 className="font-bold text-[2rem] mt-[20px]">
               Tem certeza que você deseja deletar este produto?
             </h1>
-            <div>
-              <button className="button-style bg-red-600">Não</button>
-              <button className="button-style">Sim</button>
+            <div className="flex items-center justify-center gap-10 mt-10">
+              <button className="bg-red-600 button-style">Não</button>
+              <button className="bg-green-600 button-style" onClick={() => confirmDelete()}>Sim</button>
             </div>
           </div>
         </section>
