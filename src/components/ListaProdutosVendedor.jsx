@@ -65,6 +65,7 @@ export default function ListaProdutosVendedor() {
         {produtos.map((produto) => (
           <Product
             key={produto.id}
+            id={produto.id}
             imagem={camisetapreta}
             custo={produto.custo}
             quantidade={produto.estoque ? produto.estoque.quantidade : 0}

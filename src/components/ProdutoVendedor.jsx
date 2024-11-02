@@ -2,18 +2,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { useState } from "react";
 
 const urlProdutos = "http://localhost:8090/produtos";
 
-export default function Product({id, imagem, custo, quantidade, nome, setOpen }) {
+export default function Product({
+  id,
+  imagem,
+  custo,
+  quantidade,
+  nome,
+  setOpen,
+}) {
+  const [modalDelete, setModalDelete] = useState(false);
 
   const deletarProduto = async () => {
     try {
-      const response = await axios.delete(`${urlProdutos}/deletar/${id}`)
-      console.log("Produto deletado")
+      const response = await axios.delete(`${urlProdutos}/deletar/${id}`);
+      window.location.reload();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
+
+  function abrirModalDeletar() {
+    setModalDelete(true);
+    setTimeout(() => {
+      setModalDelete(false);
+    }, 2000);
   }
 
   return (
@@ -36,9 +52,25 @@ export default function Product({id, imagem, custo, quantidade, nome, setOpen })
           <FontAwesomeIcon
             icon={faTrash}
             className="text-[#FF0048] hover:scale-110 text-[2rem] cursor-pointer"
-            onClick={() => deletarProduto()}
+            onClick={() => abrirModalDeletar()}
           />
         </div>
+      </div>
+      <div
+        id="modalDeleteComponent"
+        className={(!modalDelete && "hidden ") + ``}
+      >
+        <section className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 fixed top-0 left-0">
+          <div className="bg-bg-whitePersonalized w-[500px] m-w-[60%] h-[300px] pb-10 px-5 rounded-md mx-5 text-center relative">
+            <h1 className="font-bold text-[2rem] mt-[20px]">
+              Tem certeza que você deseja deletar este produto?
+            </h1>
+            <div>
+              <button className="button-style bg-red-600">Não</button>
+              <button className="button-style">Sim</button>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

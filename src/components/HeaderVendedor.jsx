@@ -1,4 +1,4 @@
-import { faAdd, faClose } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faCheck, faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
@@ -8,6 +8,7 @@ const urlEstoque = "http://localhost:8090/estoque";
 
 export default function HeaderVendedor() {
   const [modal, setModal] = useState(false);
+  const [modalDelet, setModalDelete] = useState(false)
 
   // Usando useRef para cada input
   const categoriaRef = useRef(null);
@@ -18,12 +19,17 @@ export default function HeaderVendedor() {
 
   const adicionarProduto = async () => {
     await criarProduto();
+    setModal(false);
+    setModalDelete(true)
+    setTimeout(() => {
+      setModalDelete(false)
+    }, 3000)
   };
 
   const criarEstoque = async () => {
     try {
       const estoqueResponse = await axios.post(`${urlEstoque}/adicionar`, {
-        quantidade: quantidadeRef.current.value,
+        quantidade: parseInt(quantidadeRef.current.value),
       });
       const estoqueId = estoqueResponse.data.id;
 
@@ -173,6 +179,14 @@ export default function HeaderVendedor() {
             </div>
           </section>
         </div>
+      </div>
+      <div id="modalDeleteComponent" className={(!modalDelet && "hidden ") + ``}>
+        <section className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 fixed top-0 left-0">
+          <div className="bg-bg-whitePersonalized w-[500px] m-w-[60%] h-[300px] pb-10 px-5 rounded-md mx-5 text-center relative">
+            <h1 className="font-bold text-[2rem] mt-[20px]">Produto adicionado com sucesso <FontAwesomeIcon className="text-green-500 absolute right-36 top-[70px] bg-green-200 p-2 rounded-full" icon={faCheck}/> </h1>
+            <p className="mt-[50px] text-[1.2rem]">Ele aparecerá na lista em alguns instantes</p>
+          </div>
+        </section>
       </div>
     </>
   );
