@@ -1,10 +1,9 @@
 import Product from "../components/ProdutoVendedor";
 import camisetapreta from "../assets/camiseta-preta.jpeg";
-import shorts from "../assets/shorts.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const baseURLProdutos = "http://localhost:8090/produtos";
 
@@ -12,6 +11,11 @@ export default function ListaProdutosVendedor() {
   const [modal, setModal] = useState(false);
   const [produtoSelecionado, setProdutoSelecionado] = useState({});
   const [produtos, setProdutos] = useState([]);
+
+  const nameRef = useRef(null);
+  const custoRef = useRef(null);
+  const quantidadeRef = useRef(null);
+  const descricaoRef = useRef(null);
 
   const fetchProdutos = async () => {
     try {
@@ -32,8 +36,47 @@ export default function ListaProdutosVendedor() {
     return () => clearInterval(intervalId);
   }, []);
 
-  const abrirModalComProduto = (nome, custo, quantidade, imagem) => {
-    setProdutoSelecionado({ nome, custo, quantidade, imagem });
+  const editProduct = async () => {
+    try {
+      const response = await axios.put(
+        `${baseURLProdutos}/editar/${produtoSelecionado.id}`,
+        {
+          "id": produtoSelecionado.id,
+          "categoria": produtoSelecionado.categoria,
+          "nome": produtoSelecionado.nome,
+          "custo": produtoSelecionado.custo,
+          "descricao": produtoSelecionado.descricao,
+        }
+      );
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function editarProduto() {
+    editProduct();
+  }
+
+  const abrirModalComProduto = (
+    id,
+    categoria,
+    nome,
+    custo,
+    quantidade,
+    descricao,
+    imagem
+  ) => {
+    setProdutoSelecionado({
+      id,
+      categoria,
+      nome,
+      custo,
+      quantidade,
+      descricao,
+      imagem,
+    });
     setModal(true);
   };
 
@@ -72,9 +115,12 @@ export default function ListaProdutosVendedor() {
             nome={produto.nome}
             setOpen={() =>
               abrirModalComProduto(
+                produto.id,
+                produto.categoria,
                 produto.nome,
                 produto.custo,
                 produto.estoque.quantidade,
+                produto.descricao,
                 camisetapreta
               )
             }
@@ -137,6 +183,18 @@ export default function ListaProdutosVendedor() {
                     autoComplete="off"
                   />
                 </div>
+                <div className="flex flex-col">
+                  <label htmlFor="descriptionProduct">descricao: </label>
+                  <textarea
+                    type="text"
+                    name={produtoSelecionado.descricao}
+                    id="descriptionProduct"
+                    placeholder={produtoSelecionado.descricao}
+                    className="inputs-styles h-[150px] w-[260px]"
+                    onChange={handleChange}
+                    autoComplete="off"
+                  />
+                </div>
               </div>
             </div>
             <div className="flex justify-center gap-10 mt-14">
@@ -146,7 +204,9 @@ export default function ListaProdutosVendedor() {
               >
                 Cancelar
               </button>
-              <button className="button-style">Salvar</button>
+              <button className="button-style" onClick={() => editarProduto()}>
+                Salvar
+              </button>
             </div>
           </section>
         </div>
