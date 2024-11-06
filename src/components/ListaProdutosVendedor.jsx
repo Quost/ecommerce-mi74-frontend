@@ -41,11 +41,11 @@ export default function ListaProdutosVendedor() {
       const response = await axios.put(
         `${baseURLProdutos}/editar/${produtoSelecionado.id}`,
         {
-          "id": produtoSelecionado.id,
-          "categoria": produtoSelecionado.categoria,
-          "nome": produtoSelecionado.nome,
-          "custo": produtoSelecionado.custo,
-          "descricao": produtoSelecionado.descricao,
+          id: produtoSelecionado.id,
+          categoria: produtoSelecionado.categoria,
+          nome: nameRef.current.value,
+          custo: custoRef.current.value,
+          descricao: descricaoRef.current.value,
         }
       );
 
@@ -157,6 +157,7 @@ export default function ListaProdutosVendedor() {
                     className="inputs-styles"
                     onChange={handleChange}
                     autoComplete="off"
+                    ref={nameRef}
                   />
                 </div>
                 <div className="flex flex-col ">
@@ -169,6 +170,7 @@ export default function ListaProdutosVendedor() {
                     className="inputs-styles"
                     onChange={handleChange}
                     autoComplete="off"
+                    ref={custoRef}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -181,6 +183,7 @@ export default function ListaProdutosVendedor() {
                     className="inputs-styles"
                     onChange={handleChange}
                     autoComplete="off"
+                    ref={quantidadeRef}
                   />
                 </div>
                 <div className="flex flex-col">
@@ -193,6 +196,7 @@ export default function ListaProdutosVendedor() {
                     className="inputs-styles h-[150px] w-[260px]"
                     onChange={handleChange}
                     autoComplete="off"
+                    ref={descricaoRef}
                   />
                 </div>
               </div>
