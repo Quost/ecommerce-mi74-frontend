@@ -56,9 +56,12 @@ export default function ListaProdutosVendedor() {
       console.log(error);
     }
   };
-
+  //FIXME: consertar essa função que verifica o input
   function editarProduto() {
-    if (nameRef == "" || custoRef == "" || descricaoRef == "") {
+    if (quantidadeRef.current.value == "") {
+      quantidadeRef =  produtoSelecionado.quantidade;
+    }
+    if (nameRef.current.value == "" || custoRef.current.value == "" || descricaoRef.current.value == "") {
       setModalErrorEdit(true);
 
       setTimeout(() => {
@@ -142,6 +145,16 @@ export default function ListaProdutosVendedor() {
           />
         ))}
       </div>
+
+      <div id="modalEditError" className={(!modalErrorEdit && "hidden ") + ``}>
+        <section className="z-50 flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 fixed top-0 left-0">
+          <div className="bg-bg-whitePersonalized w-[500px] m-w-[60%] h-[300px] pb-10 px-5 rounded-md mx-5 text-center relative">
+            <h1 className="font-bold text-[2rem] mt-[20px]">Digite um valor válido nas caixas de texto <FontAwesomeIcon className="text-[2rem] text-red-500 absolute right-[85px] top-[70px] bg-red-200 px-3 p-2 rounded-full" icon={faClose}/> </h1>
+            <p className="mt-[50px] text-[1.2rem]">Não deixe as caixas de texto vazias</p>
+          </div>
+        </section>
+      </div>
+
       <div id="modalComponent" className={(!modal && "hidden ") + ``}>
         <div className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 fixed top-0 left-0">
           <section className="bg-bg-whitePersonalized w-[60%] pb-10 px-5 rounded-md">
@@ -204,7 +217,6 @@ export default function ListaProdutosVendedor() {
                       onChange={handleChange}
                       autoComplete="off"
                       ref={quantidadeRef}
-                      required
                     />
                   </div>
                   <div className="flex flex-col">
@@ -244,15 +256,4 @@ export default function ListaProdutosVendedor() {
       </div>
     </>
   );
-}
-
-{
-  /* <div id="modalDeleteComponent" className={(!modalDelet && "hidden ") + ``}>
- <section className="flex justify-center items-center h-[100vh] w-[100vw] overflow-hidden bg-black/25 fixed top-0 left-0">
-   <div className="bg-bg-whitePersonalized w-[500px] m-w-[60%] h-[300px] pb-10 px-5 rounded-md mx-5 text-center relative">
-     <h1 className="font-bold text-[2rem] mt-[20px]">Produto adicionado com sucesso <FontAwesomeIcon className="text-green-500 absolute right-36 top-[70px] bg-green-200 p-2 rounded-full" icon={faCheck}/> </h1>
-     <p className="mt-[50px] text-[1.2rem]">Ele aparecerá na lista em alguns instantes</p>
-   </div>
- </section>
-</div> */
 }
