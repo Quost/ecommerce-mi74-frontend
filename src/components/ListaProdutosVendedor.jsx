@@ -59,7 +59,7 @@ export default function ListaProdutosVendedor() {
   //FIXME: consertar essa função que verifica o input
   function editarProduto() {
     if (quantidadeRef.current.value == "") {
-      quantidadeRef =  produtoSelecionado.quantidade;
+      quantidadeRef.current.value = produtoSelecionado.quantidade;
     }
     if (nameRef.current.value == "" || custoRef.current.value == "" || descricaoRef.current.value == "") {
       setModalErrorEdit(true);
